@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> DELETE PAGE </title>
+</head>
+<body>
+    <p>Do you wish to delete {{book.title}} by {{book.authors}}?</p>
+     <form action="{% url 'delete-book' book.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Confirm Delete">
+    </form>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Library| New book</title>
+</head>
+<body>
+    <h1>New Book</h1>
+    <form action="{% url 'create-book' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

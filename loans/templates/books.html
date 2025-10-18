@@ -1,0 +1,18 @@
+{% for book in books %}
+            <li>
+                <a>BOOK: </a>
+                <a href="{% url 'books-with-id' book.id %}">
+                    {{ book.title }} by {{ book.authors }}
+                </a>
+                <a> UPDATE:</a>
+                <a href="{% url 'update-book' book.id %}">
+                    Submit Update
+                </a>
+                <a>
+                    DELETE:
+                </a>
+                <a href="{% url 'delete-book' book.id %}">
+                    Submit Delete
+                </a>
+            </li>
+{% endfor %}
