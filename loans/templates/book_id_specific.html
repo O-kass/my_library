@@ -1,2 +1,10 @@
-<h1> "{{book.title}}" by {{book.authors}}</h1>
+{% extends "base_page.html" %}
+
+{% block title %}
+{{book.title}}
+{% endblock %}
+
+{% block content %}
+<h1>"{{book.title}}" by {{book.authors}}</h1>
 <a href="{% url 'books' %}">GO BACK TO BOOKS</a>
+{% endblock %}

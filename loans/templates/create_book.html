@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>My Library| New book</title>
-</head>
-<body>
-    <h1>New Book</h1>
-    <form action="{% url 'create-book' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+{% extends "base_page.html" %}
+{% load crispy_forms_tags %}
+
+
+
+{% block title %}
+My Library| New book
+{% endblock %}
+
+{% block content %}
+<h1>New Book</h1>
+<form action="{% url 'create-book' %}" method="post">
+    {% include "__book_form.html" with form=form name="Create" %}
+</form>
+{% endblock %}
