@@ -4,6 +4,7 @@ from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 
 from loans import models
 from loans.models import Book
@@ -13,6 +14,9 @@ from loans.forms import BookForm
 # import unseed
 
 # Create your views here.
+
+ITEMS_PER_PAGE = 25
+
 
 slogans = ["Believe in your shelf.",
 		   "Need a good read? We’ve got you covered.",
@@ -32,10 +36,6 @@ def welcome(request):
 	rand = Random()
 	context = {'slogan': rand.choice(slogans)}
 	return render(request, 'welcome.html', context)
-
-def books(request):
-	context = {'books' : Book.objects.all()}
-	return render(request, 'books.html', context)
 
 def book_with_id(request, book_id):
 	try:
@@ -95,6 +95,14 @@ def delete_book(request, book_id):
 			return HttpResponseRedirect(path)
 
 	return render(request, 'delete.html', {'book': book})
+
+def books(request):
+	book_list = Book.objects.all()
+	paginator = Paginator(book_list, ITEMS_PER_PAGE)
+	page_number = request.GET.get("page")
+	page_object = paginator.get_page(page_number)
+	context = {'page_object': page_object}
+	return render(request, 'books.html', context)
 
 
 
